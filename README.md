@@ -1,1 +1,1 @@
-# Wildfires-CO2-emmitions
+# Wildfires-CO2-emissions
