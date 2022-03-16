@@ -1,0 +1,130 @@
+```{r echo=FALSE}
+
+library(psych)
+fires_co2 = read.csv("Fires_CO2.csv", sep = ",", header = TRUE)
+```
+
+#### **Eliceo Ruiz Guzman**
+
+#### **July 29th, 2021**
+<br>
+<center> <h1>Project Report</h1> </center>
+</br>
+
+
+<br>
+**Introduction**
+
+Until 2019, CO2 emissions caused by wildfires were not considered as a carbon released into atmosphere, since it was assumed that the carbon dioxide emitted would be sequestered again in the vegetative regeneration of the forest.  In the last decade there have been several articles that prove that main factors affecting the biosphere, the stability, and the mechanism of the environment, has been the presence of forest fires, affecting thousands of acres annually on forest land surface (Flores, et al. 2017). When this phenomenon occurs, in addition to potentially causing natural deforestation, it can raise greenhouse gases (GHG) due to the release of considerable amounts of carbon in the form of carbon dioxide (CO2). These gases are factors of great importance in the contribution to global warming that could modify biodiversity (Nasi R, et al. 2002). There are several representative factors that emitted CO2 gasses amounts, such as fossil fuels burning and industrialization. That is why this brief analysis was made, to verify how significant the area affected by wildfires is related to CO2 gasses emitted in the United States. The analysis was made based in a 37-year period, from year 1983 to 2019. The CO2 emissions data were extracted from Our World Data and the wildfires data from the National Interagency Fire Center (NIFC). For the statistical analysis, a linear regression was performed where a P-value were <.05 with an R2 of 0.27, together with a correlation test between the variables of number of fires, acres, and tons of CO2.
+<style>
+body {
+text-align: justify}
+</style>
+</br>
+
+
+**Body**
+
+For the first analysis, a correlation test was made between the study variables: **Years= years_co2**; **Acres affected by Wildfires= acres**; **Co2/year emitted in billions of tons= co2_ton_year**; and **Number of fires= no_fires**. In Figure 1 you can see the variants behavior and histograms with their Scatter plots an line regression. The Paterson r value between CO2 emitted between 1983 and 2019 with affected acres was r = 0.52, which reveals an accepted relationship, while the relationship between CO2 and fire number was 0.46. Likewise, there is a relationship between the number of fires and the affected area of 0.30. Moreover, a CO2 emissions analysis was made related with the study time period (1983- 2019) with a line graph. There is a significant decrease in the amount emitted since almost 2010, which could be the realated with the acceptance of alternative energies in the country  according with the U.S. Energy Information Administration in 2020 (Figures 2). Finally, a Linear Regression graph was made, where it shows the relationship between acres affected by forest fires and CO2 emissions, where a regression test gave us a P-value of 0.0009464 (Figure 3).
+</br>
+<br>
+
+
+**Conclusion**
+
+As a conclusion, we have our Null hypothesis: **H0= Wildfires ARE NOT significant related to CO2 emissions in the US** rejected and the Alternative hypothesis: **HA= Wildfires ARE significant related to CO2 emissions in the US** is accepted as there is p-value < 0.05. Wildfires ARE significant related to CO2 emissions in the US. Furthermore, a R squared value of 0.2714 is shown, where we can conclude that 27% of the CO2 emitted in the United States can be explain an related to Wildfires.
+<style>
+body {
+text-align: justify}
+</style>
+</br>
+
+
+
+**Hypotheses** 
+
+        Null hypothesis: H0= Wildfires ARE NOT significant related to CO2 emissions in the US.
+
+       Alternative hypothesis: HA= Wildfires ARE significant related to CO2 emissions in the US.
+<br>
+<p>
+</p>
+</br>
+
+```{r echo=FALSE}
+# Correlation test
+pairs.panels(fires_co2[,], method="pearson", lm=TRUE, hist.col="#BB8FCE", main= "Correlation test between variables")
+```
+
+**Figure 1.** Histograms and correlation test between variants: Acres affected by fire = acres; CO2 emitted by years expressed in Billions of Tons = co2_ton_year; and Number of fires = no_fires; in the U.S.
+<br>
+<p>
+</p>
+</br>
+
+<br>
+<p>
+
+```{r echo=FALSE}
+#Time-series CO2 graph
+plot(fires_co2$year_co2, fires_co2$co2_billions_ton_year, main = "Time-series of Co2 behavior", xlab="Year", ylab="Co2 emossions ton/year", type="l",lwd=2, col="#154360", frame.plot = FALSE)
+```
+
+**Figure 2.** Behavior of CO2 emissions during the 1983-2019 period.
+<br>
+<p>
+</p>
+</br>
+
+<br>
+<p>
+
+```{r echo=FALSE}
+# Linear regression analysis
+lin_mod <- lm(fires_co2$co2_billions_ton_year ~ fires_co2$acres)
+lin_sum <- summary(lin_mod)
+```
+
+
+```{r echo=FALSE}
+# Visualization of regression
+plot(fires_co2$acres, fires_co2$co2_billions_ton_year, main = "Linear Regression Test", xlab="Acres", ylab="Co2 emossions ton/year", col="#154360", pch=16)
+abline(lsfit(fires_co2$acres, fires_co2$co2_billions_ton_year), col= "#D35400", lwd=2)
+text(8e+06, 4.5, paste("R2 = ", round(lin_sum$r.squared, 3)))
+```
+
+**Figure 3.** Linear Regression test of Acres affected by wildfires by the amount of CO2 emissions in the United States.
+<br>
+<p>
+</p>
+</br>
+
+
+
+<br>
+<p>
+**Table 1.** Results from Linear Regression Analysis
+
+```{r echo=FALSE}
+lin_sum
+
+```
+
+<br>
+<p>
+</p>
+</br>
+
+
+**Reference:**
+
+Administration, U. E. (2020, May 28). TODAY IN ENERGY. Retrieved from www.eia.gov: https://www.eia.gov/todayinenergy/detail.php?id=43895
+
+Flores G., J. G., Benavides S., J. D., Vega M., D. G., Leal R., H. J., Gallegos R., A., & Hernández A., E. (2017). Analisis participativo para la definición de áreas prioritarias contra incendios forestales en Jalisco. Institución 83Nacional de Investigaciones Forestales, Agricolas y Pecuarias, Experimental Centro-Altos de Jalisco. Jalisco: INIFAP-CIRPAC.
+
+Nasi R., D. R., Meijaard , E., Applegate, G., & Moore, P. (2002). Forest fire and biological diversity. Unasylva, 36-40. 
+
+NIFC. (2020). Wildfires and Acres. Retrieved from www.nifc.gov: https://www.nifc.gov/fire-information/statistics/wildfires 
+
+Ritchie, H., & Roser, M. (2020). CO₂ and Greenhouse Gas Emissions. Retrieved from OurWorldInData.org: https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions
+
